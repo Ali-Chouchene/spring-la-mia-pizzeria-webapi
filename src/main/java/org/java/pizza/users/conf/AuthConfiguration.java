@@ -18,13 +18,18 @@ public class AuthConfiguration {
 		return new BCryptPasswordEncoder();
 	}
 
+	@SuppressWarnings("removal")
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		return http
+
 				.authorizeHttpRequests(a -> a.requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
 						.requestMatchers("/admin/**").hasAuthority("USER").requestMatchers("/admin/**")
 						.hasAuthority("ADMIN").requestMatchers("/**").permitAll())
+				.csrf().disable()
+
 				.formLogin(f -> f.permitAll()).logout(l -> l.logoutSuccessUrl("/")).build();
+
 	}
 }

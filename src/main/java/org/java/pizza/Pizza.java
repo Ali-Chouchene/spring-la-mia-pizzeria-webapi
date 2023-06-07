@@ -2,7 +2,10 @@ package org.java.pizza;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "pizza")
+
 public class Pizza {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +27,11 @@ public class Pizza {
 	private Double prezzo;
 
 	@OneToMany(mappedBy = "pizza")
+	@JsonIgnore
 	private List<OffertaSpeciale> offertaspeciale;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Ingrediente> ingredienti;
 
 	public Pizza() {

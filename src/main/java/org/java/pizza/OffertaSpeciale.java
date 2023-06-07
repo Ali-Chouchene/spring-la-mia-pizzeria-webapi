@@ -3,6 +3,8 @@ package org.java.pizza;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +27,7 @@ public class OffertaSpeciale {
 	private int percentual;
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(nullable = false)
 	private Pizza pizza;
 
