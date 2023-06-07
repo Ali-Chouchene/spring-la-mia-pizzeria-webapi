@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <div class="container mt-5 pt-5">
+    <div class="w-25 mx-auto my-3"> 
+    <label class="mx-auto"><h4>Filtra per nome pizza<h4></h4></label>  
+   <form th:action="@{/pizza/by/name}" method="POST" class="form-inline my-2 my-lg-0 d-flex">
+      <input class="form-control mr-sm-2" type="search" placeholder="cerca" th:value="${name}" name="name" aria-label="Search">
+      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Trova">
+      <a class="btn btn-danger ms-2" th:href="@{/}"><i class="fa-solid fa-x fa-xl" style="color: #ffffff;"></i></a>
+    </form>
+            </div>  
+        <div class="mx-auto border border-secondary" style="min-height: 65vh;width: 80%;">
+        <div class="my-3 d-flex justify-content-center">
+        <a class="btn btn-success w-25" th:href="@{/offerte/create-offerta}"><i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i> Crea nuova offerta</a>
+        </div>
+ 
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">
+                            <h4>Nome</h4>
+                        </th>
+                        <th scope="col">
+                            <h4>Inizio</h4>
+                        </th>
+                        <th scope="col">
+                            <h4>Fine</h4>
+                        </th>
+                        <th scope="col">
+                            <h4>Percentuale</h4>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="off : ${offerte}" th:object="${off}" class="text-center">
+                        <td class="py-5">
+                            <h6>[[ *{name} ]]</h6>
+                        </td>
+                        <td class="py-5">
+                            <h6>[[ *{sDate} ]]</h6>
+                        </td>
+                        <td class="py-5">
+                            <h6>[[ *{eDate} ]]</h6>
+                        </td>
+                        <td class="py-5">
+                            <h6>[[ *{percentual}]] %</h6>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

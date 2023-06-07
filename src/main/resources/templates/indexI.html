@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <div class="container mt-5 pt-5">
+    <div class="w-25 mx-auto my-3"> 
+    <label class="mx-auto"><h4>Filtra per nome pizza<h4></h4></label>  
+   <form th:action="@{/pizza/by/name}" method="POST" class="form-inline my-2 my-lg-0 d-flex">
+      <input class="form-control mr-sm-2" type="search" placeholder="cerca" th:value="${name}" name="name" aria-label="Search">
+      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Trova">
+      <a class="btn btn-danger ms-2" th:href="@{/}"><i class="fa-solid fa-x fa-xl" style="color: #ffffff;"></i></a>
+    </form>
+            </div>  
+        <div class="mx-auto border border-secondary" style="min-height: 65vh;width: 80%;">
+        <div class="my-3 d-flex justify-content-center">
+        <a class="btn btn-success w-25" th:href="@{/offerte/create-offerta}"><i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i> Crea nuova offerta</a>
+        </div>
+ 
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">
+                            <h4>Nome</h4>
+                        </th>
+                        <th scope="col">
+                            <h4>Modifica</h4>
+                        </th>
+                        <th scope="col">
+                            <h4>Elimina</h4>
+                        </th>
+                 </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ing : ${ingredienti}" th:object="${ing}" class="text-center">
+                        <td class="py-5">
+                            <h6>[[ *{nome} ]]</h6>
+                        </td>
+                        <td class="py-5">
+                           <a th:href="@{/updateI/{id}(id=${ing.id})}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #ffffff;"></i></a>
+                        </td>
+                        <td class="py-5">
+                            <form th:action="@{'/deleteI/{id}' (id=${ing.id})}" method="Post">
+     <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash fa-xl" style="color: #ffffff;"></i></button>
+     </form>
+                        </td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

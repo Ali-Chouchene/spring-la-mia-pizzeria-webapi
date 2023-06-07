@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Pizza/' + 'create'"> </title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container mt-5 pt-5">
+    <div class="mx-auto border border-secondary d-flex justify-content-center align-items-center"
+        style="min-height: 65vh;width: 80%;">
+        <form id="off-form" th:object="${off}" method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nome Offerta</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}">
+                <div id="name" class="form-text">inserisci nome della pizza</div>
+
+                <label for="sDate" class="form-label">Data inizio</label>
+                <input type="text" class="form-control" id="sDate" th:field="*{sDate}">
+                <div id="sDate" class="form-text">inserisci data inizio offerta</div>
+
+                <label for="eDate" class="form-label">Data fine</label>
+                <input type="text" class="form-control" id="eDate" th:field="*{eDate}">
+                <div id="eDate" class="form-text">inserisci data fine offerta</div>
+
+                <label for="percentual" class="form-label">Percentuale sconto</label>
+                <input type="number" class="form-control" id="percentual" th:field="*{percentual}">
+                <div id="percentual" class="form-text">inserisci percentuale</div>
+                
+                <select name="pizza">
+			<option
+				th:each="pizza : ${pizzas}"
+				th:object="${pizza}"
+				th:value="*{id}"
+			>
+				[[ *{nome} ]]
+			</option>
+		</select>
+                <hr>
+            </div>
+            <div class="d-flex">
+             <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i>
+                Crea</button>
+            <a class="btn btn-danger ms-2" th:href="@{/}"><i class="fa-solid fa-x fa-xl" style="color: #ffffff;"></i> Annulla</a>
+            
+            </div>
+           
+        </form>
+    </div>
+</div>
+    <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
